@@ -21,7 +21,7 @@ fonte = pygame.font.SysFont('Berlin sans FB Demi',36)
 
 # Carregamento da música
 pygame.mixer.music.load('musica.mp3')
-
+keys = pygame.key.get_pressed()
 # Reprodução da música em loop (-1 para loop infinito)
 pygame.mixer.music.play(-1)
 
@@ -49,6 +49,12 @@ lista_objetivos = [Objetivos('cogumelo.png',25,30,0),
                    Objetivos('cogumelo.png',25,30,0),
                    Objetivos('cogumelo.png',25,30,0),
                    Objetivos('cogumelo.png',25,30,0),
+                   Objetivos('cogumelo.png',25,30,0),
+                   Objetivos('cogumelo.png',25,30,0),
+                   Objetivos('cogumelo.png',25,30,0),
+                   Objetivos('cogumelo.png',25,30,0),
+                   Objetivos('cogumelo.png',25,30,0),
+                   Objetivos('cogumelo.png',25,30,0),
                    Objetivos('cogumelo.png',25,30,0)]
 
 lista_bonus = [Objetivos('cogumelo_verde.png',25,30,0),
@@ -66,25 +72,32 @@ while True:
     mario.desenho(tela)
     for cogumelos_verde in lista_bonus:
         cogumelos_verde.movimento_obj()
-        cogumelos_verde.desenho(tela)
-        if mario.mascara.overlap(cogumelos_verde.mascara,(cogumelos_verde.pos_x-mario.pos_x , mario.pos_y-cogumelos_verde.pos_y)):
-            cogumelos_verde.pos_x = random.randint(50,750)
+        cogumelos_verde.desenho(tela)       
+        if cogumelos_verde.pos_y > 500:
+           cogumelos_verde.pos_x = random.randint(50,750)  
+        if mario.mascara.overlap(cogumelos_verde.mascara,(cogumelos_verde.pos_x-mario.pos_x , mario.pos_y-cogumelos_verde.pos_y)):           
             cogumelos_verde.velocidade = random.randint(1,6)
             pontuacao +=3
             cogumelos.pos_y=0
     for cogumelos in lista_objetivos:
         cogumelos.movimento_obj()
         cogumelos.desenho(tela)
+        
+        if cogumelos.pos_y > 500:
+           cogumelos.pos_x = random.randint(50,750)
         if mario.mascara.overlap(cogumelos.mascara,(cogumelos.pos_x-mario.pos_x , mario.pos_y-cogumelos.pos_y)):
-            cogumelos.pos_x = random.randint(50,750)
+            
             cogumelos.velocidade = random.randint(1,6)
             pontuacao +=1
             cogumelos.pos_y=0
     for inimigos in lista_inimigos:
         inimigos.movimento_inimigo2()
         inimigos.desenho(tela)
+       
+        if inimigos.pos_y > 500:
+            inimigos.pos_x = random.randint(50,750)  
         if mario.mascara.overlap(inimigos.mascara,(inimigos.pos_x-mario.pos_x , mario.pos_y-inimigos.pos_y)):
-            inimigos.pos_x = random.randint(50,750)
+            
             inimigos.velocidade = random.randint(1,6)
             vidas -=1
             mario.pos_x = 350

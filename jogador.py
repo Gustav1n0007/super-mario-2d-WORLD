@@ -14,6 +14,7 @@ class Player:
     
         self.mascara = pygame.mask.from_surface(self.imagem)
 
+
     def desenho(self, tela):
         tela.blit(self.imagem,(self.pos_x,self.pos_y))
 
@@ -23,6 +24,7 @@ class Player:
             self.pos_x += 3
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.pos_x -= 3
+        
 
         if self.pos_x < -80:
             self.pos_x =-80
@@ -32,6 +34,11 @@ class Player:
             self.pos_y = 400
         if self.pos_x > 750:
             self.pos_x = 750
+
+    
+    
+            
+            # self.pos_y -= 10
 
 class Fundo:
     def __init__(self,arquivo_da_img,alturaIMG,larguraIMG,x_inicial,y_inicial) -> None:
