@@ -2,7 +2,7 @@ import pygame
 import random
 
 class Obstaculos:
-    def __init__(self,arquivo_da_img,alturaIMG,larguraIMG,x_inicial,y_inicial, velocidade) -> None:
+    def __init__(self,arquivo_da_img,alturaIMG,larguraIMG,y_inicial) -> None:
         self.imagem = pygame.image.load(arquivo_da_img)
         
         self.largura = larguraIMG
@@ -10,9 +10,9 @@ class Obstaculos:
 
         self.imagem = pygame.transform.scale(self.imagem,(self.largura,self.altura))
 
-        self.pos_x = x_inicial
+        self.pos_x = random.randint(50,750)
         self.pos_y = y_inicial
-        self.velocidade = velocidade    
+        self.velocidade = random.randint(1,10)  
         self.mascara = pygame.mask.from_surface(self.imagem)
     
     def desenho(self, tela):
