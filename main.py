@@ -48,14 +48,14 @@ while True:
         cogumelos.desenho(tela)
         if mario.mascara.overlap(cogumelos.mascara,(cogumelos.pos_x-mario.pos_x , mario.pos_y-cogumelos.pos_y)):
             pontuacao +=1
-            mario.pos_x = 350
-            mario.pos_y = 500
             cogumelos.pos_y=0
     for inimigos in lista_inimigos:
         inimigos.movimento_inimigo2()
         inimigos.desenho(tela)
         if mario.mascara.overlap(inimigos.mascara,(inimigos.pos_x-mario.pos_x , mario.pos_y-inimigos.pos_y)):
             pontuacao -= 1
+            mario.pos_x = 350
+            mario.pos_y = 500
             inimigos.pos_y = 0
 
     texto_pontuacao = fonte.render(f"Pontuação: {pontuacao}",True,(0,255,0))
