@@ -12,7 +12,7 @@ class Obstaculos:
 
         self.pos_x = random.randint(50,750)
         self.pos_y = y_inicial
-        self.velocidade = random.randint(1,10)  
+        self.velocidade = random.randint(1,6)  
         self.mascara = pygame.mask.from_surface(self.imagem)
     
     def desenho(self, tela):

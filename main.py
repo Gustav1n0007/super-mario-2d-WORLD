@@ -69,7 +69,7 @@ while True:
         cogumelos_verde.desenho(tela)
         if mario.mascara.overlap(cogumelos_verde.mascara,(cogumelos_verde.pos_x-mario.pos_x , mario.pos_y-cogumelos_verde.pos_y)):
             cogumelos_verde.pos_x = random.randint(50,750)
-            cogumelos_verde.velocidade = random.randint(1,10)
+            cogumelos_verde.velocidade = random.randint(1,6)
             pontuacao +=3
             cogumelos.pos_y=0
     for cogumelos in lista_objetivos:
@@ -77,7 +77,7 @@ while True:
         cogumelos.desenho(tela)
         if mario.mascara.overlap(cogumelos.mascara,(cogumelos.pos_x-mario.pos_x , mario.pos_y-cogumelos.pos_y)):
             cogumelos.pos_x = random.randint(50,750)
-            cogumelos.velocidade = random.randint(1,10)
+            cogumelos.velocidade = random.randint(1,6)
             pontuacao +=1
             cogumelos.pos_y=0
     for inimigos in lista_inimigos:
@@ -85,7 +85,7 @@ while True:
         inimigos.desenho(tela)
         if mario.mascara.overlap(inimigos.mascara,(inimigos.pos_x-mario.pos_x , mario.pos_y-inimigos.pos_y)):
             inimigos.pos_x = random.randint(50,750)
-            inimigos.velocidade = random.randint(1,10)
+            inimigos.velocidade = random.randint(1,6)
             vidas -=1
             mario.pos_x = 350
             mario.pos_y = 500
