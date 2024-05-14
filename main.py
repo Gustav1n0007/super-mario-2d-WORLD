@@ -26,6 +26,10 @@ lista_inimigos = [Obstaculos('casco.png',25,30,0),
                   Obstaculos('casco.png',25,30,0),
                   Obstaculos('casco.png',25,30,0),
                   Obstaculos('casco.png',25,30,0),
+                  Obstaculos('casco.png',25,30,0),
+                  Obstaculos('casco.png',25,30,0),
+                  Obstaculos('casco.png',25,30,0),
+                  Obstaculos('casco.png',25,30,0),
                   Obstaculos('casco.png',25,30,0),]
 
 lista_objetivos = [Objetivos('cogumelo.png',25,30,0),
@@ -42,12 +46,13 @@ lista_objetivos = [Objetivos('cogumelo.png',25,30,0),
 lista_bonus = [Objetivos('cogumelo_verde.png',25,30,0),
                Objetivos('cogumelo_verde.png',25,30,0),
                Objetivos('cogumelo_verde.png',25,30,0),]
-
+fundo = Fundo('fundoMario.jpg',500,800,0,0)
 while True:
     for evento in pygame.event.get():          
         if evento.type == pygame.QUIT:
             rodando = False
     tela.fill((255,0,0))
+    fundo.desenho(tela)
     mario.movimento()
     mario.desenho(tela)
     for cogumelos_verde in lista_bonus:
@@ -79,7 +84,7 @@ while True:
 
     texto_pontuacao = fonte.render(f"Pontuação: {pontuacao}",True,(0,255,0))
     tela.blit(texto_pontuacao,(0,10))
-   
+    
     
     pygame.display.update()
     clock.tick(60)
