@@ -23,6 +23,7 @@ class Player:
             self.pos_x += 3
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             self.pos_x -= 3
+
         if self.pos_x < -80:
             self.pos_x =-80
         if self.pos_y < -0:
