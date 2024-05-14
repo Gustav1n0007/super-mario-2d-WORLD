@@ -26,38 +26,18 @@ pygame.mixer.music.play(-1)
 
 rodando = True #fazendo o jogo rodar infinitamente
 mario = Player('mario.png',50,50,350,500) #criando o personagem principal
-lista_inimigos = [Obstaculos('casco.png',25,30,0), #LISTA COM OS inimigos
-                  Obstaculos('casco.png',25,30,0),
-                  Obstaculos('casco.png',25,30,0),
-                  Obstaculos('casco.png',25,30,0),
-                  Obstaculos('casco.png',25,30,0),
-                  Obstaculos('casco.png',25,30,0),
-                  Obstaculos('casco.png',25,30,0),
-                  Obstaculos('casco.png',25,30,0),
-                  Obstaculos('casco.png',25,30,0),
-                  Obstaculos('casco.png',25,30,0),
-                  Obstaculos('casco.png',25,30,0),]
+lista_inimigos = [Obstaculos('casco.png',40,45,0), #LISTA COM OS inimigos
+                  Obstaculos('casco.png',40,45,0),
+                  Obstaculos('casco.png',40,45,0),
+                  Obstaculos('casco.png',40,45,0), #LISTA COM OS inimigos
+                  Obstaculos('casco.png',40,45,0),]
 
-lista_objetivos = [Objetivos('cogumelo.png',25,30,0), #Lista com os objetivos   
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0),
-                   Objetivos('cogumelo.png',25,30,0)]
+lista_objetivos = [Objetivos('cogumelo.png',40,45,0), #Lista com os objetivos   
+                   Objetivos('cogumelo.png',40,45,0),
+                   Objetivos('cogumelo.png',40,45,0),
+                   Objetivos('cogumelo.png',40,45,0),]
 
-lista_bonus = [Objetivos('cogumelo_verde.png',25,30,0), #Lista com os objetivos extras
-               Objetivos('cogumelo_verde.png',25,30,0),
-               Objetivos('cogumelo_verde.png',25,30,0),]
+lista_bonus = [Objetivos('cogumelo_verde.png',40,45,0),] #Lista com os objetivos extras
 fundo = Fundo('fundoMario.jpg',500,800,0,0) #Fundo do jogo
 marioWin = Fundo('marioWIn.png',400,170,100,100) #Caso você venca
 while True:

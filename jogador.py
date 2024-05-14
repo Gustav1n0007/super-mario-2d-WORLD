@@ -21,9 +21,9 @@ class Player:
     def movimento(self):
         keys = pygame.key.get_pressed() #verificar se uma tecla foi clicada
         if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
-            self.pos_x += 3
+            self.pos_x += 5 
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
-            self.pos_x -= 3
+            self.pos_x -= 5
         
 
         if self.pos_x < -80:
