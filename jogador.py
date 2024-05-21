@@ -18,11 +18,28 @@ class Player:
     def desenho(self, tela):
         tela.blit(self.imagem,(self.pos_x,self.pos_y))
 
+    def movimento2(self):
+        keys = pygame.key.get_pressed() #verificar se uma tecla foi clicada
+        if keys[pygame.K_RIGHT]:
+            self.pos_x += 5 
+        if keys[pygame.K_LEFT]:
+            self.pos_x -= 5
+        
+
+        if self.pos_x < -80:
+            self.pos_x =-80
+        if self.pos_y < -0:
+            self.pos_y = -0
+        if self.pos_y > 400:
+            self.pos_y = 400
+        if self.pos_x > 750:
+            self.pos_x = 750
+            
     def movimento(self):
         keys = pygame.key.get_pressed() #verificar se uma tecla foi clicada
-        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+        if keys[pygame.K_d]:
             self.pos_x += 5 
-        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+        if keys[pygame.K_a]:
             self.pos_x -= 5
         
 
