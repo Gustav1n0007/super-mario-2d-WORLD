@@ -25,13 +25,13 @@ pygame.mixer.music.load('musica.mp3')
 pygame.mixer.music.play(-1) 
 
 rodando = True #fazendo o jogo rodar infinitamente
-mario = Player('mario.png',70,70,350,500) #criando o personagem principal
-luigi = Player('luigi.png',65,75,450,500)
-lista_inimigos = [Obstaculos('casco.png',40,45,0), #LISTA COM OS inimigos
-                  Obstaculos('casco.png',40,45,0),
-                  Obstaculos('casco.png',40,45,0),
-                  Obstaculos('casco.png',40,45,0), #LISTA COM OS inimigos
-                  Obstaculos('casco.png',40,45,0),]
+mario = Player('mario.png',50,50,350,500) #criando o personagem principal
+luigi = Player('luigi.png',45,55,450,500)
+lista_inimigos = [Obstaculos('casco.png',30,35,0), #LISTA COM OS inimigos
+                  Obstaculos('casco.png',30,35,0),
+                  Obstaculos('casco.png',30,35,0),
+                  Obstaculos('casco.png',30,35,0), #LISTA COM OS inimigos
+                  Obstaculos('casco.png',30,35,0),]
 
 lista_objetivos = [Objetivos('cogumelo.png',40,45,0), #Lista com os objetivos   
                    Objetivos('cogumelo.png',40,45,0),
@@ -42,6 +42,7 @@ lista_bonus = [Objetivos('cogumelo_verde.png',40,45,0),] #Lista com os objetivos
 fundo = Fundo('fundoMario.jpg',500,800,0,0) #Fundo do jogo
 marioWin = Fundo('marioWIn.png',400,170,100,100) #Caso você venca
 luigi_aparece = False
+freeze_screen = False
 while rodando:
     for evento in pygame.event.get():          
         if evento.type == pygame.QUIT:
@@ -50,6 +51,9 @@ while rodando:
             if evento.key == pygame.K_SPACE:
                 luigi_aparece = True
                 vidas += 5
+        elif evento.type == pygame.KEYDOWN:
+            if evento.key == pygame.K_F1:  # Pressionando a tecla de espaço para congelar/descongelar a tela
+                freeze_screen = True
     tela.fill((255,0,0)) #pintando a tela
     fundo.desenho(tela) #Colocando o fundo como fundo
     mario.movimento() #funcao para o movimento do mario
@@ -73,10 +77,11 @@ while rodando:
             pontuacao +=3 #Pontuacao caso acerte o item
             cogumelos.pos_y=0
         if luigi.mascara.overlap(cogumelos_verde.mascara,(cogumelos_verde.pos_x-luigi.pos_x , luigi.pos_y-cogumelos_verde.pos_y)): #Colisao        
-            cogumelos_verde.pos_x = random.randint(50,750)  #voltar numa posicao aleatoria
-            cogumelos_verde.velocidade = random.randint(4,8) #Com velocidade aleatoria
-            pontuacao +=3 #Pontuacao caso acerte o item
-            cogumelos.pos_y=0
+            if luigi_aparece == True:
+                cogumelos_verde.pos_x = random.randint(50,750)  #voltar numa posicao aleatoria
+                cogumelos_verde.velocidade = random.randint(4,8) #Com velocidade aleatoria
+                pontuacao +=3 #Pontuacao caso acerte o item
+                cogumelos.pos_y=0
     for cogumelos in lista_objetivos: #loop para jogar os itens
         cogumelos.movimento_obj() #movimento dos itens
         cogumelos.desenho(tela) #desenhando os ittens na tela
@@ -87,12 +92,15 @@ while rodando:
         if mario.mascara.overlap(cogumelos.mascara,(cogumelos.pos_x-mario.pos_x , mario.pos_y-cogumelos.pos_y)): #colisao
             cogumelos.pos_x = random.randint(50,750) #voltar numa posicao aleatoria
             cogumelos.velocidade = random.randint(4,8) #com velocidade aleatoria
-        if luigi.mascara.overlap(cogumelos.mascara,(cogumelos.pos_x-luigi.pos_x , luigi.pos_y-cogumelos.pos_y)): #colisao
-            cogumelos.pos_x = random.randint(50,750) #voltar numa posicao aleatoria
-            cogumelos.velocidade = random.randint(4,8) #com velocidade aleatoria
-
             pontuacao +=1 #pontuacao
             cogumelos.pos_y=0
+        if luigi.mascara.overlap(cogumelos.mascara,(cogumelos.pos_x-luigi.pos_x , luigi.pos_y-cogumelos.pos_y)): #colisao
+            
+            if luigi_aparece == True:
+                cogumelos.pos_x = random.randint(50,750) #voltar numa posicao aleatoria
+                cogumelos.velocidade = random.randint(4,8) #com velocidade aleatoria
+                pontuacao +=1 #pontuacao
+                cogumelos.pos_y=0
     for inimigos in lista_inimigos: #loop para jogar os inimigos
         inimigos.movimento_inimigo2() #movimento
         inimigos.desenho(tela) #desenho deles na tela
@@ -103,14 +111,17 @@ while rodando:
         if mario.mascara.overlap(inimigos.mascara,(inimigos.pos_x-mario.pos_x , mario.pos_y-inimigos.pos_y)): #colsiao
             inimigos.pos_x = random.randint(50,750) #voltar em pos aleatoria  
             inimigos.velocidade = random.randint(4,8) #velocidade aleatora
-        if luigi.mascara.overlap(inimigos.mascara,(inimigos.pos_x-luigi.pos_x , luigi.pos_y-inimigos.pos_y)): #colsiao
-            inimigos.pos_x = random.randint(50,750) #voltar em pos aleatoria  
-            inimigos.velocidade = random.randint(4,8) #velocidade aleatora
-            
             vidas -=1
             mario.pos_x = 350
             mario.pos_y = 500
-            inimigos.pos_y = 0
+        if luigi.mascara.overlap(inimigos.mascara,(inimigos.pos_x-luigi.pos_x , luigi.pos_y-inimigos.pos_y)): #colsiao
+            inimigos.pos_x = random.randint(50,750) #voltar em pos aleatoria  
+            inimigos.velocidade = random.randint(4,8) #velocidade aleatora
+            if luigi_aparece == True:
+                vidas -=1
+                luigi.pos_x = 350
+                luigi.pos_y = 500
+                inimigos.pos_y = 0
     
     texto_pontuacao = fonte.render(f"Pontuação: {pontuacao}",True,(0,0,0)) #para mostrar a pontuacao
     texto_vidas = fonte.render(f'Vidas: {vidas}',True,(0,0,0)) #mostrar a qtd de vidas
@@ -125,11 +136,11 @@ while rodando:
     if vidas == 0 or vidas < 0:
         fundo.desenho(tela) #tela de derrota, caso perca
         tela.blit(texto_gameOver,(320,200))
-    
     if pontuacao == 50 or pontuacao >50: #tela de vitoria caso ganhe
         fundo.desenho(tela)
         tela.blit(texto_WIN,(320,200))
         marioWin.desenho(tela)
-    pygame.display.update()
+    if freeze_screen == False:
+        pygame.display.update()
     clock.tick(60)
     

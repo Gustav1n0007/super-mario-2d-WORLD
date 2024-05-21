@@ -10,7 +10,7 @@ class Obstaculos:
 
         self.imagem = pygame.transform.scale(self.imagem,(self.largura,self.altura))
 
-        self.pos_x = random.randint(50,750)
+        self.pos_x = random.randint(0,800)
         self.pos_y = y_inicial
         self.velocidade = random.randint(4,8)  
         self.mascara = pygame.mask.from_surface(self.imagem)
